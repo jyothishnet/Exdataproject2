@@ -14,6 +14,7 @@ dataMaryLand <- DATA[DATA$fips=='24510',];
 
 dataMaryLand <- dataMaryLand[dataMaryLand$year>=1999 & dataMaryLand$year<=2008,];
 
-qplot(dataMaryLand$year,dataMaryLand$Emissons,colour=dataMaryLand$type, data=dataMaryLand, alpha=I(.5),
+qplot(dataMaryLand$year,dataMaryLand$Emissons,facets=.~dataMaryLand$type, data=dataMaryLand, alpha=I(.5),
+      geom=c("point","smooth")
       main="Emissons in Maryland", xlab="Year",
       ylab="Total Emissions")
