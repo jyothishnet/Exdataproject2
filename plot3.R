@@ -14,7 +14,10 @@ dataMaryLand <- DATA[DATA$fips=='24510',];
 
 dataMaryLand <- dataMaryLand[dataMaryLand$year>=1999 & dataMaryLand$year<=2008,];
 
-qplot(dataMaryLand$year,dataMaryLand$Emissons,facets=.~dataMaryLand$type, data=dataMaryLand, alpha=I(.5),
-      geom=c("point","smooth")
-      main="Emissons in Maryland", xlab="Year",
-      ylab="Total Emissions")
+
+## Create PNG File
+#png(filename = "plot3.png",
+    width = 960, height = 960, units = "px", bg = "white");
+qplot(year,Emissions,data=dataMaryLand,facets=.~ type,main="Pollution in Maryland",geom=c("line","smooth"),method="lm");
+
+#dev.off();
