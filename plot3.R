@@ -13,11 +13,15 @@ DATA <- merge(NEI,SCC,by.x="SCC",by.y="SCC");
 dataMaryLand <- DATA[DATA$fips=='24510',];
 
 dataMaryLand <- dataMaryLand[dataMaryLand$year>=1999 & dataMaryLand$year<=2008,];
-
+agg <- aggregate(dataMaryLand[c("Emissions")],list(type=dataMaryLand$type,year=dataMaryLand$year),sum);
 
 ## Create PNG File
-#png(filename = "plot3.png",
+png(filename = "plot3.png",
     width = 960, height = 960, units = "px", bg = "white");
-qplot(year,Emissions,data=dataMaryLand,facets=.~ type,main="Pollution in Maryland",geom=c("line","smooth"),method="lm");
+p <- ggplot(agg, aes(x=year, y=Emissions, colour=type)) +
+  geom_point(alpha=.3) +
+  geom_smooth(alpha=.2, size=1, method="loess") +
+  ggtitle("Total Emissions by Type in Baltimore City");
+print(p)
 
 #dev.off();
